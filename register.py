@@ -1,7 +1,7 @@
 from pymongo import MongoClient
 
 
-def Register(fname, lname, email, password):
+def Register(fname, lname, email, password, userid):
     # print('first' + fname)
     client = MongoClient()
     client = MongoClient('localhost', 27017)
@@ -13,11 +13,13 @@ def Register(fname, lname, email, password):
     # cursor = authentication.find({})
     # for document in cursor:
     #     print("abracadabra", document)
+    print("userid",userid)
     auth_data = {
         'fname': fname,
         'lname': lname,
         'email': email,
-        'password': password
+        'password': password,
+        'userid': userid
     }
     # DELETE DATA
     # res = authentication.delete_many({})

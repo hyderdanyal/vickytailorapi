@@ -12,9 +12,12 @@ def Login(email, password):
     }
     display = authentication.find()
     for auth in display:
+        # print(auth)
         if auth['email'] == auth_data['email']:
             if auth_data['password'] == auth['password']:
-                return ("Sucessful Login")
+                print('USERID',auth['userid'])
+                return ("Login Success",auth['userid'])
+                
             else:
                 return (" Incorrect Password")
         else:

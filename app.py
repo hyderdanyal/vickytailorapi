@@ -6,10 +6,16 @@ from login import *
 from forgot import *
 from validateotp import *
 from changepass import *
+from confirmcart import *
+from createcart import *
+from getcart import *
 
 app = Flask(__name__)
 CORS(app)
 
+# client=MongoClient(("mongodb://localhost:27017/"))
+# mydb= client[]
+# print("databae",client.list_database_names())
 
 @app.route("/changepass")
 def passwo():
@@ -33,7 +39,8 @@ def reg():
     lname = request.args.get('lname')
     email = request.args.get('email')
     password = request.args.get('password')
-    message = Register(fname, lname, email, password)
+    userid = request.args.get('userid')
+    message = Register(fname, lname, email, password,userid)
     return jsonify(message)
 
 
@@ -42,7 +49,7 @@ def log():
     email = request.args.get('email')
     password = request.args.get('password')
     msg = Login(email, password)
-    return(jsonify(msg))
+    return jsonify(msg)
 
 
 @app.route("/submitpass")
@@ -73,6 +80,24 @@ def otp():
     email = request.args.get('email')
     res = validateotp(checkotp, email)
     return jsonify(res)
+
+@app.route("/confirmcart")
+def confirm():
+    getitem = request.args.get('getitem')
+    message = Cart(getitem)
+    return jsonify(message)
+
+@app.route("/createcart")
+def create():
+    userid = request.args.get('userid')
+    message = CreateCart(userid)
+    return jsonify(message)
+
+@app.route("/getcart")
+def get():
+    userid = request.args.get('userid')
+    message = getCart(userid)
+    return message
 
 
 if __name__ == " __main__ ":
